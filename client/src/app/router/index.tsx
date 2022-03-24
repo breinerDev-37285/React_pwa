@@ -1,4 +1,4 @@
-import { BrowserRouter as Router,useRoutes,Routes,Route } from 'react-router-dom'
+import { BrowserRouter as Router,Routes,Route } from 'react-router-dom'
 import MainNavigation from '@utils/components/navigation'
 import ProtectedAppLayout from '@modules/app/layout'
 import { PrivateRoute } from './types'

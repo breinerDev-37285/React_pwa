@@ -1,11 +1,6 @@
 import { Formik,Form,Field,ErrorMessage } from 'formik'
 import { IRegister } from '@modules/auth/interface/register'
 import * as Yup from 'yup'
-import { useContext, useEffect, useReducer } from 'react'
-import { RegisterReducer } from '../reducers/register'
-import { startRegister } from '../actions'
-import { AuthContext } from '@helpers/context'
-
 
 export const Register = () => {
 
@@ -26,20 +21,12 @@ export const Register = () => {
                     .required('password is required')
     })
 
-    const [ state,dispath ] = useReducer(RegisterReducer, init)
-    const { setAuthenticated } = useContext(AuthContext)
-
-    useEffect(() => {
-        if(state !== init){
-            setAuthenticated(true)
-        }
-    }, [state,init])
 
     return <div>
         <br />
         <Formik 
             initialValues={init}
-            onSubmit={ val => {startRegister(val, dispath) } }
+            onSubmit={ val => console.log(val) }
             validationSchema={ validations }
         >
             <Form>

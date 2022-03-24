@@ -1,10 +1,11 @@
-import { AuthProvider } from "@helpers/context"
-import MainRouting from "./router"
+import { Provider } from 'react-redux'
+import Store from '@redux/store'
+import MainRouting from "@router/index"
 
 const App = () => {
-    return <AuthProvider>
+    return <Provider store={Store}>
         <MainRouting/>
-    </AuthProvider>
+    </Provider>
 }
 
 export default App

@@ -1,5 +1,3 @@
-import { AuthContext } from '@helpers/context'
-import { useContext } from 'react'
 import { Outlet, Navigate } from 'react-router-dom'
 
 interface IRouteAuth {
@@ -8,6 +6,6 @@ interface IRouteAuth {
 }
 
 export const PrivateRoute = () => {
-    const { isAuth } = useContext(AuthContext)
+    const isAuth = false
     return isAuth ? <Outlet/> : <Navigate to='/login'/>
 }

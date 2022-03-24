@@ -13,7 +13,8 @@ export default defineConfig({
       "@modules": resolve(path_src, 'modules'),
       "@router": resolve(path_src, 'router'),
       "@utils": resolve(path_src, 'utils'),
-      "@helpers": resolve(path_src, 'helpers')
+      "@helpers": resolve(path_src, 'helpers'),
+      "@redux": resolve(path_src, 'redux')
     }
   }
 })

@@ -21,7 +21,8 @@
       "@modules/*": ["app/modules/*"],
       "@router/*": ["app/router/*"],
       "@utils/*":["app/utils/*"],
-      "@helpers/*":["app/helpers/*"]
+      "@helpers/*":["app/helpers/*"],
+      "@redux/*":["app/redux/*"]
     }
   },
   "include": ["src"],

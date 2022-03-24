@@ -1,3 +1,3 @@
 import UserRoutes from './users'
 
-export default [UserRoutes.Routes()]
+export default [UserRoutes.init().Routes]

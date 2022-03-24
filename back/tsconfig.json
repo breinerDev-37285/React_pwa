@@ -11,7 +11,8 @@
       "@database/*": ["app/database/*"],
       "@interface/*": ["app/interface/*"],
       "@server/*": ["app/server/*"],
-      "@routes/*": ["app/routes/*"]
+      "@routes/*": ["app/routes/*"],
+      "@services/*": ["app/services/*"]
     }
   },
   "include": ["src"]

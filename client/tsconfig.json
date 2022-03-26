@@ -22,7 +22,8 @@
       "@router/*": ["app/router/*"],
       "@utils/*":["app/utils/*"],
       "@helpers/*":["app/helpers/*"],
-      "@redux/*":["app/redux/*"]
+      "@redux/*":["app/redux/*"],
+      "@context/*": ["app/context/*"]
     }
   },
   "include": ["src"],

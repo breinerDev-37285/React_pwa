@@ -14,7 +14,8 @@ export default defineConfig({
       "@router": resolve(path_src, 'router'),
       "@utils": resolve(path_src, 'utils'),
       "@helpers": resolve(path_src, 'helpers'),
-      "@redux": resolve(path_src, 'redux')
+      "@redux": resolve(path_src, 'redux'),
+      "@context": resolve(path_src, 'context')
     }
   }
 })

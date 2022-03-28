@@ -1,12 +1,9 @@
-import Navigation from "@modules/auth/components/navigation"
-import { Outlet } from 'react-router-dom'
+import { AuthRoutes } from '../routes'
 
-export const AuthLayout = () => {
-
-  return  <>
-    <Navigation />
-    <Outlet />
-  </> 
+export const LayoutAuth = () => {
+    return (
+        <>
+            <AuthRoutes />
+        </>
+    )
 }
-
-export default AuthLayout

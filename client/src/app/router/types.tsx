@@ -1,11 +1,33 @@
-import { Outlet, Navigate } from 'react-router-dom'
+import { Navigate, useLocation } from 'react-router-dom'
 
-interface IRouteAuth {
+export const PublicRoute = ({
+    isAuth,
+    children,
+}: {
     isAuth: boolean
-    [x: string]: any
+    children: JSX.Element
+}) => {
+    let location = useLocation()
+
+    return isAuth ? (
+        <Navigate to="/app" state={{ from: location }} replace />
+    ) : (
+        children
+    )
 }
 
-export const PrivateRoute = () => {
-    const isAuth = false
-    return isAuth ? <Outlet/> : <Navigate to='/login'/>
+export const PrivateRoute = ({
+    isAuth,
+    children,
+}: {
+    isAuth: boolean
+    children: JSX.Element
+}) => {
+    let location = useLocation()
+
+    return isAuth ? (
+        children
+    ) : (
+        <Navigate to="/login" state={{ from: location }} replace />
+    )
 }

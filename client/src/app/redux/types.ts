@@ -1,2 +1,5 @@
 export const THEME = '[theme] setTheme'
 export const REGISTER = '[auth] register'
+export const CHECKING = '[auth] checking'
+export const SIGNIN = '[auth] signin'
+export const LOGOUT = '[auth] logout'

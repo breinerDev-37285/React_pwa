@@ -1,11 +1,26 @@
-export interface IRegisterState {
+export interface IAuthState {
+    checking?: boolean
+    username: string
     uid: string
-    username: string 
-    checking: boolean
-    token: string
 }
 
-export interface IRegiserAction {
-    type: string 
-    payload?: IRegisterState
+export interface IAuthAction {
+    type: string
+    payload?: IAuthState
+}
+
+export interface IAuthReponse {
+    ok: boolean
+    status: number
+    uid?: string
+    msg?: string
+    token?: string
+    error?: any
+    username?: string
+}
+
+export interface IAuthLoginResponse {
+    uid: string
+    username: string
+    token?: string
 }

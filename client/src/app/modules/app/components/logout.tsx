@@ -1,17 +1,16 @@
-import { useContext } from "react"
-import { useNavigate } from 'react-router-dom'
+import { startLogout } from '@redux/actions/auth'
+import { useDispatch } from 'react-redux'
 
 export const Logout = () => {
+    const dispatch = useDispatch()
 
-    const navigate = useNavigate()
+    return (
+        <>
+            <h2>Protected Page</h2>
 
-    const handleAuth = () => {
-        navigate('/', { replace: true });
-    }
-
-    return <>
-        <h2>Protected Page</h2>
-
-        <button type="button" onClick={ handleAuth }>Logout</button>
-    </>
+            <button type="button" onClick={() => dispatch(startLogout())}>
+                Logout
+            </button>
+        </>
+    )
 }

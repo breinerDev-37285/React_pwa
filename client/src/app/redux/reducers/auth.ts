@@ -1,18 +1,25 @@
-import { IRegisterState,IRegiserAction } from '@redux/interfaces/auth';
-import { REGISTER } from '@redux/types'
+import { IAuthState, IAuthAction } from '@redux/interfaces/auth'
+import { REGISTER, CHECKING, SIGNIN } from '@redux/types'
 
-const init: IRegisterState = {
+const init: IAuthState = {
     uid: '',
     username: '',
     checking: true,
-    token: ''
 }
 
-export const AuthReducer = (state = init, { type, payload }:IRegiserAction):IRegisterState => { 
-    
-    switch( type ){
+export const AuthReducer = (
+    state = init,
+    { type, payload }: IAuthAction
+): IAuthState => {
+    switch (type) {
         case REGISTER:
-            state = {...state, ...payload}
+            state = { ...state, ...payload }
+            break
+        case CHECKING:
+            state = { ...state, checking: false }
+            break
+        case SIGNIN:
+            state = { ...state, ...payload }
             break
     }
 

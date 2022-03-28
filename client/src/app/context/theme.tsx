@@ -1,13 +1,23 @@
-import { useTheme } from "@utils/hooks/useTheme";
-import { createContext, ReactNode } from "react";
+import { useTheme } from '@utils/hooks/useTheme'
+import { createContext, ReactNode } from 'react'
+import { TTheme } from '@utils/interfaces/theme'
 
-export const ThemeContext = createContext({}!)
+interface IThemeContext {
+    theme: TTheme | ''
+    setTheme: (val: TTheme) => void
+}
 
-export const ThemeProvider = ({children}:{children:ReactNode}) => {
-    
-    const theme = useTheme()
+export const ThemeContext = createContext<IThemeContext>({
+    theme: '',
+    setTheme: () => {},
+})
 
-    return <ThemeContext.Provider value={{...theme}}>{
-        children
-    }</ThemeContext.Provider>
+export const ThemeProvider = ({ children }: { children: ReactNode }) => {
+    const { theme, setTheme } = useTheme('light')
+
+    return (
+        <ThemeContext.Provider value={{ theme, setTheme }}>
+            {children}
+        </ThemeContext.Provider>
+    )
 }

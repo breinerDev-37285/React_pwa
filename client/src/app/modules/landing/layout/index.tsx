@@ -1,10 +1,11 @@
-import {LandingRouting} from '../router/index'
+import { LandingRouting } from '../router/index'
 
 export const LandingLayout = () => {
-  return <>
-        <LandingRouting/>
-  </>
+    return (
+        <>
+            <LandingRouting />
+        </>
+    )
 }
-
 
 export default LandingLayout

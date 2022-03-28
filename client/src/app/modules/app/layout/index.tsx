@@ -1,11 +1,11 @@
-import { Logout } from "../components/logout"
+import { Logout } from '../components/logout'
 
 export const ProtectedAppLayout = () => {
-  return (
-    <div>
-      <Logout />
-    </div>
-  )
+    return (
+        <div>
+            <Logout />
+        </div>
+    )
 }
 
 export default ProtectedAppLayout

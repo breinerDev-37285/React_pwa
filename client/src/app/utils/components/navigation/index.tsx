@@ -1,27 +1,124 @@
+import { ThemeContext } from '@context/theme'
+import { IRedux } from '@redux/interfaces/redux'
+import { useForm } from '@utils/hooks/useForm'
+import { useContext, useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
+interface ITheme {
+    check: boolean
+}
+
 const MainNavigation = () => {
-  return <div className="navbar bg-base-100">
-  <div className="flex-1">
-    <a className="btn btn-ghost normal-case text-xl">BreinerTech</a>
-  </div>
-  <div className="flex-none">
-    <ul className="menu menu-horizontal p-0">
-      <li><a>Item 1</a></li>
-      <li >
-        <a>
-          Parent
-          <svg className="fill-current" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"/></svg>
-        </a>
-        <ul className="p-2 bg-base-100">
-          <li><a>Submenu 1</a></li>
-          <li><a>Submenu 2</a></li>
-        </ul>
-      </li>
-      <li><a>Item 3</a></li>
-    </ul>
-  </div>
-</div>
+    const { theme, setTheme } = useContext(ThemeContext)
+    const init: ITheme = {
+        check: theme === 'dark',
+    }
+
+    const { check, handleInputChange } = useForm(init)
+
+    useEffect(() => {
+        setTheme(check ? 'dark' : 'light')
+    }, [check, setTheme])
+
+    return (
+        <div className="navbar bg-base-100 px-5">
+            <div className="navbar-start">
+                <div className="dropdown lg:hidden pr-3">
+                    <label tabIndex={0} className="btn btn-ghost">
+                        <i className="fa-solid fa-bars text-xl"></i>
+                    </label>
+                    <ul
+                        tabIndex={0}
+                        className="menu menu-compact dropdown-content mt-2 p-2 shadow bg-base-200 rounded-box w-52"
+                    >
+                        <Nav />
+                    </ul>
+                </div>
+                <a className="normal-case text-xl">BreinerTech</a>
+            </div>
+            <div className="navbar-center hidden lg:flex">
+                <ul className="flex-navbar menu menu-horizontal p-0">
+                    <Nav />
+                </ul>
+            </div>
+            <div className="navbar-end">
+                <label
+                    className={`swap swap-rotate pr-3 ${
+                        check && 'swap-active'
+                    }`}
+                    htmlFor="checkTheme"
+                >
+                    <i className="fa-solid fa-sun text-xl swap-on" />
+                    <i className="fa-solid fa-moon text-xl swap-off" />
+                </label>
+
+                <input
+                    id="checkTheme"
+                    type="checkbox"
+                    className="toggle"
+                    checked={check}
+                    name="check"
+                    onChange={handleInputChange}
+                />
+            </div>
+        </div>
+    )
+}
+
+const Nav = () => {
+    const { uid } = useSelector((i: IRedux) => i.auth)
+
+    return (
+        <>
+            <li>
+                <Link to="/">Home</Link>
+            </li>
+
+            <li>
+                <Link to="/about">About</Link>
+            </li>
+
+            <li>
+                <Link to="/contacts">Contacts</Link>
+            </li>
+
+            <li>
+                <Link to="/services">Services</Link>
+            </li>
+
+            {!uid && (
+                <li tabIndex={0}>
+                    <Link to="/login">Auth</Link>
+                    <ul className="p-2">
+                        <li>
+                            <Link to="/login">Sign IN</Link>
+                        </li>
+
+                        <li>
+                            <Link to="/login/register">Register</Link>
+                        </li>
+                    </ul>
+                </li>
+            )}
+
+            {uid && (
+                <li tabIndex={0}>
+                    <Link to="/app" className="justify-between">
+                        App
+                    </Link>
+                    <ul className="p-2">
+                        <li>
+                            <Link to="/app">Protected page 1</Link>
+                        </li>
+                        <li>
+                            <Link to="/app/protectect2">Protected page 2</Link>
+                        </li>
+                    </ul>
+                </li>
+            )}
+        </>
+    )
 }
 
 export default MainNavigation

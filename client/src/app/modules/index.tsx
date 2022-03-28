@@ -1,0 +1,1 @@
+import {  LandingLayout } from './landing/layout'

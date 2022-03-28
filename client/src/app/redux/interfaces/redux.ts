@@ -1,5 +1,5 @@
-import { IRegisterState } from './auth'
+import { IAuthState } from './auth'
 
 export interface IRedux {
-    auth: IRegisterState
+    auth: IAuthState
 }

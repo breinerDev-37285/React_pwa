@@ -1,59 +1,69 @@
-import { Formik,Form,Field,ErrorMessage } from 'formik'
-import { IRegister } from '@modules/auth/interface/register'
-import * as Yup from 'yup'
+import { Formik, Form, Field, ErrorMessage } from 'formik'
+import { IAuth } from '@modules/landing/interface/auth'
+import { validations } from '@modules/landing/validation/auth'
 
 export const Register = () => {
-
-    const init:IRegister = {
+    const init: IAuth = {
         username: '',
-        password: ''
+        password: '',
     }
 
-    const validations = Yup.object({
-        username: Yup.string()
-                    .min(2, 'username require at least 2 characters')
-                    .max(7, 'username required maximum 7 characters')
-                    .required('username is required'),
+    return (
+        <div className="flex justify-center items-center mt-12">
+            <div className="w-96 bg-base-200 shadow-md rounded px-8 pt-6 pb-8 mb-4">
+                <Formik
+                    initialValues={init}
+                    onSubmit={(val) => console.log(val)}
+                    validationSchema={validations}
+                >
+                    <Form>
+                        <div className="form-control mb-4">
+                            <label className="label text-gray font-bold">
+                                Username
+                            </label>
+                            <Field
+                                type="text"
+                                name="username"
+                                placeholder="username"
+                                className="input input-bordered input-md "
+                            />
+                            <br />
+                            <ErrorMessage
+                                name="username"
+                                component="span"
+                                className="text-sm italic"
+                            />
+                        </div>
 
-        password: Yup.string()
-                    .min(8, 'password require at least 8 characters')
-                    .max(12,'password required maximum 12 characters')
-                    .required('password is required')
-    })
+                        <div className="form-control mb-6">
+                            <label className="label text-gray font-bold">
+                                Password
+                            </label>
+                            <Field
+                                type="password"
+                                name="password"
+                                placeholder="*************"
+                                className="input input-bordered input-md "
+                            />
+                            <br />
+                            <ErrorMessage
+                                name="password"
+                                component="span"
+                                className="text-sm italic"
+                            />
+                        </div>
 
-
-    return <div>
-        <br />
-        <Formik 
-            initialValues={init}
-            onSubmit={ val => console.log(val) }
-            validationSchema={ validations }
-        >
-            <Form>
-                <div>
-                    <Field 
-                        name='username'
-                        placeholder='username'
-                    />
-                    <ErrorMessage name='username' component='span'/>
-                </div>
-
-                <br />
-
-                <div>
-                    <Field 
-                        name='password'
-                        placeholder='password'
-                    />
-                    <ErrorMessage name='password'  component='span'/>
-                </div>
-
-                <br />
-
-                <button type="submit">Register</button>
-            </Form>
-        </Formik>
-    </div>
+                        <button
+                            type="submit"
+                            className="btn btn-primary w-full"
+                        >
+                            Register
+                        </button>
+                    </Form>
+                </Formik>
+            </div>
+        </div>
+    )
 }
 
 export default Register

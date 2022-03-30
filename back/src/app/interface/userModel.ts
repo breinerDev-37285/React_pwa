@@ -1,6 +1,11 @@
 import { Document } from 'mongoose'
 
-export interface IUserModel extends Document{
-    username: string 
+export interface IUser {
+    username: string
     password: string
+    email: string
+}
+
+export interface IUserModel extends IUser, Document {
+    compareHash: (pass: string) => Promise<any>
 }

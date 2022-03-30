@@ -1,5 +1,5 @@
 import { IAuth } from '@modules/landing/interface/auth'
-import { validations } from '@modules/landing/validation/auth'
+import { validationsSignIn } from '@modules/landing/validation/auth'
 import { startLogin } from '@redux/actions/auth'
 import { ErrorMessage, Field, Form, Formik } from 'formik'
 import { useDispatch } from 'react-redux'
@@ -8,6 +8,7 @@ export const SignInComponent = () => {
     const init: IAuth = {
         username: '',
         password: '',
+        email: '',
     }
 
     const dispatch = useDispatch()
@@ -20,7 +21,7 @@ export const SignInComponent = () => {
                     onSubmit={(val) => {
                         dispatch(startLogin(val))
                     }}
-                    validationSchema={validations}
+                    validationSchema={validationsSignIn}
                 >
                     <Form>
                         <div className="form-control mb-4">

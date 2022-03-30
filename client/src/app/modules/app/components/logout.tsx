@@ -6,8 +6,6 @@ export const Logout = () => {
 
     return (
         <>
-            <h2>Protected Page</h2>
-
             <button type="button" onClick={() => dispatch(startLogout())}>
                 Logout
             </button>

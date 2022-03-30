@@ -1,13 +1,14 @@
-import { IAuth } from './../../modules/landing/interface/auth'
 import { fetching } from '@helpers/fetch'
+import { IAuth } from '@modules/landing/interface/auth'
 import { IAuthAction, IAuthLoginResponse } from '@redux/interfaces/auth'
-import { CHECKING, SIGNIN, LOGOUT } from '@redux/types'
+import { SIGNIN, LOGOUT, REGISTER } from '@redux/types'
 import { trackPromise } from 'react-promise-tracker'
 
 const URL = import.meta.env.VITE_API
 
-export const checkingAuth = (): IAuthAction => ({
-    type: CHECKING,
+export const register = (payload: IAuthLoginResponse): IAuthAction => ({
+    type: REGISTER,
+    payload,
 })
 
 export const login = ({
@@ -34,8 +35,7 @@ export const startLogout = () => async (dispatch: (val?: any) => void) => {
     const token = localStorage.getItem('token')
 
     if (!token) {
-        dispatch(logout())
-        return dispatch(checkingAuth())
+        return dispatch(logout())
     }
 
     const { data, status } = await trackPromise(
@@ -53,37 +53,56 @@ export const startLogout = () => async (dispatch: (val?: any) => void) => {
         localStorage.removeItem('token')
 
         dispatch(logout())
-        dispatch(checkingAuth())
     }
 }
+
+export const startRegister =
+    (auth: IAuth) => async (dispatch: (val?: any) => void) => {
+        const { status, data } = await trackPromise(
+            fetching({
+                url: `${URL}/users`,
+                method: 'post',
+                data: { ...auth },
+            }).catch((err) => {
+                console.error('error during fetching', err.response.data)
+            })
+        )
+
+        if (status === 200 && data.ok) {
+            const { token, uid, username } = data
+
+            if (!token) return
+
+            dispatch(register({ uid, username, token }))
+        }
+    }
 
 export const startCheckingAuth =
     () => async (dispatch: (val?: any) => void) => {
         const token = localStorage.getItem('token')
 
         if (!token) {
-            dispatch(logout())
-            return dispatch(checkingAuth())
+            return dispatch(logout())
         }
 
-        const data = await fetching({
-            url: `${URL}/refresh`,
-            method: 'post',
-            data: {},
-            headers: {
-                'x-token': token,
-            },
-        }).catch((err) => {
-            console.error('error during fetching', err.response.data)
-        })
+        const data = await trackPromise(
+            fetching({
+                url: `${URL}/refresh`,
+                method: 'post',
+                data: {},
+                headers: {
+                    'x-token': token,
+                },
+            }).catch((err) => {
+                console.error('error during fetching', err.response.data)
+            })
+        )
 
         if (data.status === 200 && data.data.ok) {
             const { uid, username, token } = data.data
 
             dispatch(login({ uid, username, token }))
         }
-
-        dispatch(checkingAuth())
     }
 
 export const startLogin =

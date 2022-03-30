@@ -103,18 +103,8 @@ const Nav = () => {
             )}
 
             {uid && (
-                <li tabIndex={0}>
-                    <Link to="/app" className="justify-between">
-                        App
-                    </Link>
-                    <ul className="p-2">
-                        <li>
-                            <Link to="/app">Protected page 1</Link>
-                        </li>
-                        <li>
-                            <Link to="/app/protectect2">Protected page 2</Link>
-                        </li>
-                    </ul>
+                <li>
+                    <Link to="/app">App</Link>
                 </li>
             )}
         </>

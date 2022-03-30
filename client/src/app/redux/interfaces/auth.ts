@@ -1,5 +1,4 @@
 export interface IAuthState {
-    checking?: boolean
     username: string
     uid: string
 }
@@ -23,4 +22,9 @@ export interface IAuthLoginResponse {
     uid: string
     username: string
     token?: string
+}
+
+export interface IAuth {
+    username: string
+    password: string
 }
